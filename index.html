@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BetConexões</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background-color: black;
+            color: #ff0;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* Fundo animado com quadrados amarelos */
+        .background-squares {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            overflow: hidden;
+        }
+
+        .square {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background-color: #ff0;
+            opacity: 0.6;
+            animation: float 10s linear infinite;
+        }
+
+        @keyframes float {
+            from {
+                transform: translateY(100vh) scale(0.5);
+                opacity: 0.8;
+            }
+            to {
+                transform: translateY(-20vh) scale(1);
+                opacity: 0;
+            }
+        }
+
+        /* Logo */
+        .logo {
+            position: absolute;
+            user-select: none;
+            top: -90px;
+            left: 295px;
+            transform: translateX(-50%);
+            z-index: -1;
+        }
+
+        .logo img {
+            width: 480px;
+            transition: transform 0.2s ease-in-out;
+        }
+
+        /* Botões */
+        .buttons {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 180px;
+            gap: 20px;
+        }
+
+        .buttons a {
+            text-decoration: none;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+        }
+
+        .button {
+            background-color: #ff0;
+            color: black;
+            padding: 18px 35px;
+            border: none;
+            border-radius: 30px;
+            font-size: 20px;
+            cursor: pointer;
+            font-weight: bold;
+            text-transform: uppercase;
+            text-align: center;
+            width: 270px;
+            box-shadow: 0px 4px 15px rgba(255, 255, 0, 0.8);
+            transition: transform 0.3s, box-shadow 0.3s, background-color 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+        }
+
+        .button i {
+            color: black;
+            font-size: 24px;
+        }
+
+        .button:hover {
+            background-color: #fff700;
+            transform: scale(1.1);
+            box-shadow: 0px 6px 20px rgba(255, 255, 0, 1);
+        }
+
+        /* Modal com transição suave */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: black;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(255, 255, 0, 0.8);
+            text-align: center;
+            opacity: 0;
+            transition: opacity 0.3s ease-in-out;
+        }
+
+        .modal.show {
+            display: block;
+            opacity: 1;
+        }
+
+        .modal img {
+            width: 150px;
+            margin: 10px;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+
+        .modal img:hover {
+            transform: scale(1.1);
+        }
+
+        .close {
+            background-color: #ff0;
+            color: black;
+            padding: 12px;
+            font-size: 18px;
+            border: none;
+            cursor: pointer;
+            margin-top: 10px;
+            border-radius: 5px;
+        }
+
+        .close:hover {
+            background-color: #fff700;
+        }
+    </style>
+</head>
+<body>
+    <div class="background-squares"></div>
+    <div class="logo">
+        <img src="img/Inserir_um_subtítulo-removebg-preview.png" alt="Logo">
+    </div>
+
+    <div class="buttons">
+        <a href="https://seusite.com/como-funciona" target="_blank">
+            <button class="button"><i class="fas fa-question-circle"></i> Como Funciona?</button>
+        </a>
+        <a href="https://seusite.com/cadastro" target="_blank">
+            <button class="button"><i class="fas fa-user-plus"></i> Cadastre-se</button>
+        </a>
+        <a href="https://chat.whatsapp.com/CNPtVlGv7oq5iWErDFaZVX" target="_blank">
+            <button class="button"><i class="fab fa-whatsapp"></i> Grupo WhatsApp</button>
+        </a>
+        <a href="https://t.me/+pIdyAhQCxDA1NmNh" target="_blank">
+            <button class="button"><i class="fab fa-telegram-plane"></i> Grupo Telegram</button>
+        </a>
+        <a href="https://seusite.com" target="_blank">
+            <button class="button"><i class="fas fa-globe"></i> Nosso Site</button>
+        </a>
+        <button class="button" onclick="openModal()"><i class="fas fa-handshake"></i> Parcerias</button>
+    </div>
+
+    <!-- Modal -->
+    <div id="modal" class="modal">
+        <h2 style="color: #ff0;">Parcerias</h2>
+        <div>
+            <a href="#" target="_blank"><img src="https://via.placeholder.com/150" alt="Plataforma 1"></a>
+            <a href="#" target="_blank"><img src="https://via.placeholder.com/150" alt="Plataforma 2"></a>
+        </div>
+        <button class="close" onclick="closeModal()">Fechar</button>
+    </div>
+
+    <script>
+        function openModal() {
+            const modal = document.getElementById("modal");
+            modal.style.display = "block";
+            setTimeout(() => modal.classList.add("show"), 10);
+        }
+
+        function closeModal() {
+            const modal = document.getElementById("modal");
+            modal.classList.remove("show");
+            setTimeout(() => modal.style.display = "none", 300);
+        }
+
+        function createSquares() {
+            const container = document.querySelector(".background-squares");
+            for (let i = 0; i < 15; i++) {
+                let square = document.createElement("div");
+                square.classList.add("square");
+                square.style.left = Math.random() * 100 + "vw";
+                square.style.animationDuration = (Math.random() * 5 + 5) + "s";
+                container.appendChild(square);
+            }
+        }
+
+        createSquares();
+    </script>
+</body>
+</html>
